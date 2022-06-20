@@ -21,11 +21,32 @@ def get_max_test_result():
 
     return max_result
 
+def add_student_result():
+    """
+    Add student name and result to dictunary 
+    """
+    
+    record = int(input("Enter the number of students: "))
+
+    stud_data={}
+
+    for i in range(0,record):
+        name = input("Enter the student name :").split()
+        result = input(f"Enter result for {name}:").split()
+        name_key =  name[0]
+        result_value = int(result[0])
+        stud_data[name_key] = result_value
+    print(stud_data)
+    return stud_data
+
+
 def main():
     """
-    Run all program functins
+    Run all program functions
     """
     get_test_subject()
     get_max_test_result()
+    add_student_result()
 
 main()
+
