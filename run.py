@@ -15,10 +15,21 @@ def get_test_subject():
 def get_max_test_result():
     """
     Get max test result for calculating student test performance and test stats
+    Validate if input is digit. If input is not digit ask the user to enter
+    valid number.
     """
-    max_result = input("What's max test result? ")
-    print(f"Maximum result in this test is: {max_result} p\n")
-
+    valid_digit = False
+    
+    while not valid_digit:
+        max_result = input("What's max test result? ")
+        
+        if max_result.isdigit():
+            print(f"Maximum result in this test is: {max_result} p \n")
+            valid_digit = True
+            
+        else:
+            print(f"Your input is {max_result} and this is not valid number, please try again: \n")
+        
     return max_result
 
 def add_student_result():
@@ -46,7 +57,7 @@ def main():
     """
     get_test_subject()
     get_max_test_result()
-    add_student_result()
+    #add_student_result()
 
 main()
 
