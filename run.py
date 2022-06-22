@@ -1,13 +1,9 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
 def get_test_subject():
     """
     Get the subject of the test to be used in end summary 
     """
     test_subject = input("What's the subject for this test? ")
-    print(f"Subejct for this test is: {test_subject}\n")
+    print(f"Subject for this test is: {test_subject}\n")
 
     return test_subject
 
@@ -32,14 +28,18 @@ def get_max_test_result():
         
     return max_result
 
+
 def add_student_result():
     """
-    Add student name and result to dictunary 
+    Add student name and result to dictionary
     """
-    
+    print("Expected input for number of student is number, example 10, 24")
     record = int(input("Enter the number of students: "))
 
     stud_data={}
+
+    print("\nExpected input for name is characters, example: Eva, Dan")
+    print("Expected input for result is number, example 12, 23")
 
     for i in range(0,record):
         name = input("Enter the student name :").split()
@@ -48,6 +48,7 @@ def add_student_result():
         result_value = int(result[0])
         stud_data[name_key] = result_value
     print(stud_data)
+    print(max_result)
     return stud_data
 
 
@@ -57,7 +58,7 @@ def main():
     """
     get_test_subject()
     get_max_test_result()
-    #add_student_result()
+    add_student_result()
 
 main()
 
