@@ -17,6 +17,7 @@ def get_max_test_result():
     valid_digit = False
     
     while not valid_digit:
+        global max_result
         max_result = input("What's max test result? ")
         
         if max_result.isdigit():
@@ -43,22 +44,48 @@ def add_student_result():
 
     for i in range(0,record):
         name = input("Enter the student name :").split()
-        result = input(f"Enter result for {name}:").split()
+        result = input(f"Enter result for {name}:").split() #add input check result is not > max result
         name_key =  name[0]
         result_value = int(result[0])
         stud_data[name_key] = result_value
-    print(stud_data)
-    print(max_result)
+
     return stud_data
 
+def calc_student_performance(data, value):
+    """
+    Take the input data from add student data and max_result value and calculate the student performance and
+    grade according to predefined levels.
+    """
+    students = data
+    max_result = int(value)
+    for result in students.items():
+
+            stud_perf = int((result[1] / max_result) * 100)
+
+            student_test_perf = result + (stud_perf,)
+
+            if stud_perf >= 90:
+                student_test_row = student_test_perf + ("A",)
+            elif stud_perf >= 80:
+                student_test_row = student_test_perf + ("B",)
+            elif stud_perf >= 70:
+                student_test_row = student_test_perf + ("C",)
+            elif stud_perf >= 60:
+                student_test_row = student_test_perf + ("D",)
+            elif stud_perf >= 50:
+                student_test_row = student_test_perf + ("E",)
+            else:
+                student_test_row = student_test_perf + ("Failed",)
+            
+            print(student_test_row)
 
 def main():
     """
     Run all program functions
     """
     get_test_subject()
-    get_max_test_result()
-    add_student_result()
-
+    max_result = get_max_test_result()
+    stud_data = add_student_result()
+    students_performance = calc_student_performance(stud_data, max_result)
+    
 main()
-
