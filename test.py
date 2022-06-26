@@ -1,5 +1,8 @@
 #This file is for unit testing purpose
 
+import pandas as pd
+from colorama import Fore, Back, Style
+
 """
 def get_max_test_result(): #data input and data validation
 
@@ -47,7 +50,7 @@ add_student_result()
 
 """
 def calc_student_performance():
-    
+
     max_result = 98
     students = {"eva":90, "bob":85, "maria":72, "grace":63, "dan":51, "eric":43}
     students_list = []
@@ -57,7 +60,7 @@ def calc_student_performance():
         
         student_test_perf = result + (stud_perf,)
         if stud_perf >= 90:
-            student_test_row = student_test_perf + ("A",)
+            student_test_row = student_test_perf + (Fore.GREEN + "A",)
         elif stud_perf >= 80:
             student_test_row = student_test_perf + ("B",)
         elif stud_perf >= 70:
@@ -67,7 +70,7 @@ def calc_student_performance():
         elif stud_perf >= 50:
             student_test_row = student_test_perf + ("E",)
         else:
-            student_test_row = student_test_perf + ("Failed",)
+            student_test_row = student_test_perf + (Fore.RED + "Failed",)
         
         student_list = list(student_test_row)
         stud_list_of_list.append(student_list)
@@ -75,17 +78,19 @@ def calc_student_performance():
 
 
 calc_student_performance()
-"""
 
+
+"""
 def list_data_to_table():
 
-    import pandas as pd
-
-    list_data = [['eva', 90, 91, 'A'], ['bob', 85, 86, 'B'], ['maria', 72, 73, 'C']
-    , ['grace', 63, 64, 'D'], ['dan', 51, 52, 'E'], ['eric', 43, 43, 'Failed']]
+    list_data = [['eva', 90, 91, 'A'], ['bob', 85, 86, 'B'], ['maria', 72, 73, 'C'], ['grace', 63, 64, 'D'], ['dan', 51, 52, 'E'], ['eric', 43, 43, 'Failed']]
     
     df = pd.DataFrame(list_data, columns = ["Name", "Test Result", "Performance", "Grade"])
     perfor_sort = df.sort_values(by="Performance", ascending=False)
+
+
     print(perfor_sort)
 
 list_data_to_table()
+
+

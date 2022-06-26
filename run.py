@@ -1,3 +1,6 @@
+import pandas as pd
+from colorama import Fore, Back, Style
+
 def get_test_subject():
     """
     Get the subject of the test to be used in end summary 
@@ -17,11 +20,11 @@ def get_max_test_result():
     valid_digit = False
     
     while not valid_digit:
-        global max_result
+        
         max_result = input("What's max test result? ")
         
         if max_result.isdigit():
-            print(f"Maximum result in this test is: {max_result} p \n")
+            print(f"Maximum result in this test is: {max_result} points \n")
             valid_digit = True
             
         else:
@@ -78,9 +81,10 @@ def calc_student_performance(data, value):
         elif stud_perf >= 50:
             student_test_row = student_test_perf + ("E",)
         else:
-            student_test_row = student_test_perf + ("Failed",)
+            student_test_row = student_test_perf + (Fore.RED + "Failed",)
         
         student_list = list(student_test_row)
+        print(student_list)
         stud_list_of_list.append(student_list)
 
     return stud_list_of_list
@@ -90,9 +94,7 @@ def list_data_to_table(data):
     """
     converts list data to table and apply sorting on performance column
     """
-
-    import pandas as pd
-
+    
     df = pd.DataFrame(data, columns = ["Name", "Test Result", "Performance", "Grade"])
     perfor_sort = df.sort_values(by="Performance", ascending=False)
     
@@ -106,7 +108,6 @@ def main():
     max_result = get_max_test_result()
     stud_data = add_student_result()
     stud_list_of_list = calc_student_performance(stud_data, max_result)
-    print(stud_list_of_list)
     student_perfor_table = list_data_to_table(stud_list_of_list)
     print(student_perfor_table)
     return student_perfor_table
