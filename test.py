@@ -47,15 +47,19 @@ student name and result to dictionary
 add_student_result()
 """
 
-
 def calc_student_performance():
     """
-    Take the input data from add student data and calculate the student performance based on the max_result
+    Take the input data from add student data and calculate the student performance based
+    on the max_resultuse. Use the performance and predefined grade levels and create a student
+    test row including name, test result, performance and grade. Return a list of lists.
     """
     max_result = 98
     students = {"eva":90, "bob":85, "maria":72, "grace":63, "dan":51, "eric":43}
+    students_list = []
+    stud_list_of_list = []
     for result in students.items():
         stud_perf = int((result[1] / max_result) * 100)
+        
         student_test_perf = result + (stud_perf,)
         if stud_perf >= 90:
             student_test_row = student_test_perf + ("A",)
@@ -69,7 +73,10 @@ def calc_student_performance():
             student_test_row = student_test_perf + ("E",)
         else:
             student_test_row = student_test_perf + ("Failed",)
+        
+        student_list = list(student_test_row)
+        stud_list_of_list.append(student_list)
+    print(stud_list_of_list)
 
-        print(student_test_row)    
 
 calc_student_performance()
