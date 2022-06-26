@@ -53,31 +53,50 @@ def add_student_result():
 
 def calc_student_performance(data, value):
     """
-    Take the input data from add student data and max_result value and calculate the student performance and
-    grade according to predefined levels.
+    Take the input data from add student data and calculate the student performance based
+    on the max_resultuse. Use the performance and predefined grade levels and create a student
+    test row including name, test result, performance and grade. Return a list of lists.
     """
     students = data
     max_result = int(value)
+    stud_list_of_list = []
+
     for result in students.items():
 
-            stud_perf = int((result[1] / max_result) * 100)
+        stud_perf = int((result[1] / max_result) * 100)
 
-            student_test_perf = result + (stud_perf,)
+        student_test_perf = result + (stud_perf,)
 
-            if stud_perf >= 90:
-                student_test_row = student_test_perf + ("A",)
-            elif stud_perf >= 80:
-                student_test_row = student_test_perf + ("B",)
-            elif stud_perf >= 70:
-                student_test_row = student_test_perf + ("C",)
-            elif stud_perf >= 60:
-                student_test_row = student_test_perf + ("D",)
-            elif stud_perf >= 50:
-                student_test_row = student_test_perf + ("E",)
-            else:
-                student_test_row = student_test_perf + ("Failed",)
-            
-            print(student_test_row)
+        if stud_perf >= 90:
+            student_test_row = student_test_perf + ("A",)
+        elif stud_perf >= 80:
+            student_test_row = student_test_perf + ("B",)
+        elif stud_perf >= 70:
+            student_test_row = student_test_perf + ("C",)
+        elif stud_perf >= 60:
+            student_test_row = student_test_perf + ("D",)
+        elif stud_perf >= 50:
+            student_test_row = student_test_perf + ("E",)
+        else:
+            student_test_row = student_test_perf + ("Failed",)
+        
+        student_list = list(student_test_row)
+        stud_list_of_list.append(student_list)
+
+    return stud_list_of_list
+
+
+def list_data_to_table(data):
+    """
+    converts list data to table and apply sorting on performance column
+    """
+
+    import pandas as pd
+
+    df = pd.DataFrame(data, columns = ["Name", "Test Result", "Performance", "Grade"])
+    perfor_sort = df.sort_values(by="Performance", ascending=False)
+    
+    return perfor_sort
 
 def main():
     """
@@ -86,6 +105,10 @@ def main():
     get_test_subject()
     max_result = get_max_test_result()
     stud_data = add_student_result()
-    students_performance = calc_student_performance(stud_data, max_result)
-    
+    stud_list_of_list = calc_student_performance(stud_data, max_result)
+    print(stud_list_of_list)
+    student_perfor_table = list_data_to_table(stud_list_of_list)
+    print(student_perfor_table)
+    return student_perfor_table
+
 main()

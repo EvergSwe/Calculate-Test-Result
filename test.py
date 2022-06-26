@@ -24,8 +24,6 @@ print(result)
 """
 def add_student_result():
 
-student name and result to dictionary
-
     print("Expected input for number of student is number, example 10, 24")
     record = int(input("Enter the number of students: "))
 
@@ -47,12 +45,9 @@ student name and result to dictionary
 add_student_result()
 """
 
+"""
 def calc_student_performance():
-    """
-    Take the input data from add student data and calculate the student performance based
-    on the max_resultuse. Use the performance and predefined grade levels and create a student
-    test row including name, test result, performance and grade. Return a list of lists.
-    """
+    
     max_result = 98
     students = {"eva":90, "bob":85, "maria":72, "grace":63, "dan":51, "eric":43}
     students_list = []
@@ -80,3 +75,17 @@ def calc_student_performance():
 
 
 calc_student_performance()
+"""
+
+def list_data_to_table():
+
+    import pandas as pd
+
+    list_data = [['eva', 90, 91, 'A'], ['bob', 85, 86, 'B'], ['maria', 72, 73, 'C']
+    , ['grace', 63, 64, 'D'], ['dan', 51, 52, 'E'], ['eric', 43, 43, 'Failed']]
+    
+    df = pd.DataFrame(list_data, columns = ["Name", "Test Result", "Performance", "Grade"])
+    perfor_sort = df.sort_values(by="Performance", ascending=False)
+    print(perfor_sort)
+
+list_data_to_table()
