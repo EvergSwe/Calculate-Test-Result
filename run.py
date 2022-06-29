@@ -1,6 +1,7 @@
 import pandas as pd
 from colorama import Fore, Back, Style
 
+
 def get_test_subject():
     """
     Get the subject of the test to be used in end summary 
@@ -18,39 +19,47 @@ def get_max_test_result():
     valid number.
     """
     valid_digit = False
-    
+
     while not valid_digit:
-        
+
         max_result = input("What's max test result? ")
-        
+
         if max_result.isdigit():
             print(f"Maximum result in this test is: {max_result} points \n")
             valid_digit = True
-            
+
         else:
-            print(f"Your input is {max_result} and this is not valid number, please try again: \n")
-        
-    return max_result
+            print(
+                f"Your input is {max_result} and this is not valid number, please try again: \n")
+
+    return int(max_result)
 
 
-def add_student_result():
+def add_student_result(max_result):
     """
     Add student name and result to dictionary
     """
     print("Expected input for number of student is number, example 10, 24")
     record = int(input("Enter the number of students: "))
 
-    stud_data={}
+    stud_data = {}
 
     print("\nExpected input for name is characters, example: Eva, Dan")
     print("Expected input for result is number, example 12, 23")
 
-    for i in range(0,record):
-        name = input("Enter the student name :").split()
-        result = input(f"Enter result for {name}:").split() #add input check result is not > max result
-        name_key =  name[0]
-        result_value = int(result[0])
-        stud_data[name_key] = result_value
+    for i in range(0, record):
+
+        name = input("Enter the student name :")
+        result_str = input(f"Enter result for {name}:")
+        result = int(result_str)
+
+        while result > max_result:
+            print(f"Entered result {result} is higher than max result")
+            result_str = input(f"Enter new result for {name}:")
+            result = int(result_str)
+
+        stud_data[name] = result
+        print(stud_data)
 
     return stud_data
 
@@ -82,7 +91,7 @@ def calc_student_performance(data, value):
             student_test_row = student_test_perf + ("E",)
         else:
             student_test_row = student_test_perf + (Fore.RED + "Failed",)
-        
+
         student_list = list(student_test_row)
         print(student_list)
         stud_list_of_list.append(student_list)
@@ -94,11 +103,13 @@ def list_data_to_table(data):
     """
     converts list data to table and apply sorting on performance column
     """
-    
-    df = pd.DataFrame(data, columns = ["Name", "Test Result", "Performance", "Grade"])
+
+    df = pd.DataFrame(
+        data, columns=["Name", "Test Result", "Performance", "Grade"])
     perfor_sort = df.sort_values(by="Performance", ascending=False)
-    
+
     return perfor_sort
+
 
 def main():
     """
@@ -106,10 +117,11 @@ def main():
     """
     get_test_subject()
     max_result = get_max_test_result()
-    stud_data = add_student_result()
+    stud_data = add_student_result(max_result)
     stud_list_of_list = calc_student_performance(stud_data, max_result)
     student_perfor_table = list_data_to_table(stud_list_of_list)
     print(student_perfor_table)
     return student_perfor_table
+
 
 main()
