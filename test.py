@@ -3,7 +3,7 @@
 import pandas as pd
 from colorama import Fore, Back, Style
 
-"""
+
 def get_max_test_result():  # data input and data validation
 
     valid_digit = False
@@ -23,7 +23,7 @@ def get_max_test_result():  # data input and data validation
 
 result = get_max_test_result()
 print(result)
-"""
+
 
 def add_student_result(value):
 
@@ -45,7 +45,7 @@ def add_student_result(value):
 
 add_student_result(10)
 
-"""
+
 def calc_student_performance():
 
     max_result = 98
@@ -75,9 +75,9 @@ def calc_student_performance():
     print(stud_list_of_list)
 
 calc_student_performance()
-"""
 
-"""
+
+
 def list_data_to_table():
 
     list_data = [['eva', 90, 91, 'A'], ['bob', 85, 86, 'B'], ['maria', 72, 73, 'C'], [
@@ -90,4 +90,3 @@ def list_data_to_table():
 
 
 list_data_to_table()
-"""

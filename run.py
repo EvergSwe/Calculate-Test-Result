@@ -37,36 +37,41 @@ def get_max_test_result():
 
 def add_student_result(max_result):
     """
-    Add student name and result to dictionary
+    Add student name and result to dictionary, validate if student result is higher than max result.
     """
     print("Expected input for number of student is number, example 10, 24")
-    record = int(input("Enter the number of students: "))
+    records = int(input("Enter the number of students: "))
 
     stud_data = {}
 
     print("\nExpected input for name is characters, example: Eva, Dan")
     print("Expected input for result is number, example 12, 23")
 
-    for i in range(0, record):
+    for i in range(0, records):
 
-        name = input("Enter the student name :")
-        result_str = input(f"Enter result for {name}:")
-        result = int(result_str)
+        name = input("\nEnter the student name :")
+        result_str = input(f"\nEnter result for {name}:")
+        while True:
+            try:
+                result = int(result_str)
+                break
+            except ValueError:
+                print("this is not a number, please enter a valid number")
+                result_str = input(f"\nEnter result for {name}:")
 
         while result > max_result:
-            print(f"Entered result {result} is higher than max result")
+            print(f"\nEntered result {result} is higher than max result")
             result_str = input(f"Enter new result for {name}:")
             result = int(result_str)
 
         stud_data[name] = result
-        print(stud_data)
 
     return stud_data
 
 def calc_student_performance(data, value):
     """
     Take the input data from add student data and calculate the student performance based
-    on the max_resultuse. Use the performance and predefined grade levels and create a student
+    on the max_result. Use the performance and predefined grade levels and create a student
     test row including name, test result, performance and grade. Return a list of lists.
     """
     students = data
@@ -76,7 +81,6 @@ def calc_student_performance(data, value):
     for result in students.items():
 
         stud_perf = int((result[1] / max_result) * 100)
-
         student_test_perf = result + (stud_perf,)
 
         if stud_perf >= 90:
@@ -93,19 +97,18 @@ def calc_student_performance(data, value):
             student_test_row = student_test_perf + (Fore.RED + "Failed",)
 
         student_list = list(student_test_row)
-        print(student_list)
         stud_list_of_list.append(student_list)
 
     return stud_list_of_list
 
 
-def list_data_to_table(data):
+def list_data_to_table(list_data):
     """
     converts list data to table and apply sorting on performance column
     """
 
     df = pd.DataFrame(
-        data, columns=["Name", "Test Result", "Performance", "Grade"])
+        list_data, columns=["Name", "Test Result", "Performance", "Grade"])
     perfor_sort = df.sort_values(by="Performance", ascending=False)
 
     return perfor_sort
