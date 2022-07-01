@@ -52,16 +52,16 @@ def add_student_result(max_result):
         result_str = input(f"\nEnter result for {name}:")
         while True:
             try:
-                result = int(result_str)
+                result = float(result_str)
                 break
             except ValueError:
-                print("this is not a number, please enter a valid number")
+                print("this is not a valid number, please enter a valid number, example 10 or 9.5")
                 result_str = input(f"\nEnter result for {name}:")
 
         while result > max_result:
             print(f"\nEntered result {result} is higher than max result")
             result_str = input(f"Enter new result for {name}:")
-            result = int(result_str)
+            result = float(result_str)
 
         stud_data[name] = result
 
@@ -120,6 +120,7 @@ def main():
     get_test_subject()
     max_result = get_max_test_result()
     stud_data = add_student_result(max_result)
+    print(stud_data)
     stud_list_of_list = calc_student_performance(stud_data, max_result)
     student_perfor_table = list_data_to_table(stud_list_of_list)
     print(student_perfor_table)
