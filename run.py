@@ -34,7 +34,6 @@ def get_max_test_result():
 
     return int(max_result)
 
-
 def add_student_result(max_result):
     """
     Add student name and result to dictionary, validate if student result is higher than max result.
